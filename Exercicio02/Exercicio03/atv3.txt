@@ -1,0 +1,59 @@
+Questão 1 – Classe muito grande (God Class)
+
+Problema: A classe SistemaAcademico concentrava muitas responsabilidades (cadastrar aluno, calcular média, emitir relatórios, etc.), com mais de 3000 linhas.
+
+Refatoração: Usei o Princípio da Responsabilidade Única (SRP), separando a lógica em classes menores (CadastroAluno, CalculadoraMedia, Relatorio, Notificacao, Pagamento).
+
+Benefício: Código mais organizado, fácil de manter e evoluir, além de diminuir impacto de mudanças.
+
+Questão 2 – Código duplicado
+
+Problema: A regra de cálculo de frete estava copiada em três lugares diferentes.
+
+Refatoração: Criei uma classe utilitária CalculadoraFrete para centralizar essa lógica.
+
+Benefício: Evita duplicação, reduz chance de inconsistência (se mudar a regra de frete, muda só em um lugar).
+
+Questão 3 – Muitos parâmetros (Long Parameter List)
+
+Problema: O método gerarRelatorioFinanceiro tinha 8 parâmetros, incluindo vários booleanos, dificultando a leitura e aumentando risco de erros.
+
+Refatoração: Criei uma classe RelatorioRequest (objeto parâmetro) para agrupar os dados.
+
+Benefício: Código mais claro, fácil de entender e expandir (se precisar adicionar novo parâmetro, basta incluir no objeto).
+
+Questão 4 – Condicionais aninhadas
+
+Problema: O cálculo de bônus usava vários if aninhados, deixando o código complexo e difícil de manter.
+
+Refatoração: Sugeri duas abordagens:
+
+Early return → sair mais cedo e evitar aninhamento.
+
+Polimorfismo → criar classes de regras de bônus (RegraGerenteFinanceiro) que verificam condições de forma isolada.
+
+Benefício: Código mais legível, regras mais fáceis de alterar e ampliar sem quebrar tudo.
+
+Questão 5 – Nomes genéricos
+
+Problema: Métodos e variáveis com nomes genéricos (doIt, a, x1, temp). Isso atrapalha a leitura e o entendimento do código.
+
+Refatoração: Troquei para nomes claros (calcularSoma, numero1, numero2, soma).
+
+Benefício: Facilita manutenção, acelera aprendizado de novos desenvolvedores e melhora a comunicação na equipe.
+
+Questão 6 – Código duplicado (no estoque)
+
+Problema: O cálculo de valor total do pedido estava repetido em Pedido, CarrinhoDeCompras e RelatorioFinanceiro.
+
+Refatoração: Criei CalculadoraTotal para concentrar a lógica.
+
+Benefício: Mesma vantagem da Questão 2 → manutenção centralizada, menos erros, código mais limpo.
+
+Questão 7 – Inveja dos dados (Data Clumps / Feature Envy)
+
+Problema: A classe RelatorioFinanceiro fazia cálculos usando diretamente atributos do Funcionario, em vez de deixar a lógica dentro de Funcionario.
+
+Refatoração: Mudei o método calcularPagamento() para a classe Funcionario. Agora RelatorioFinanceiro só delega a chamada.
+
+Benefício: Segue o encapsulamento, cada classe cuida de sua própria lógica. Isso deixa o código mais coeso e menos dependente de detalhes internos.
